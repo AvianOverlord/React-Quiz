@@ -10,16 +10,13 @@ class Question extends React.Component
 
     handleClick(value, e)
     {
-        console.log("Answer pushed");
         e.preventDefault();
         if(value === parseInt(this.props.correct))
         {
-            console.log("Correct Answer pushed");
             this.props.getAnswer(true);
         }
         else
         {
-            console.log("False Answer pushed");
             this.props.getAnswer(false);
         }
     }

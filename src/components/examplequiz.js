@@ -1,7 +1,6 @@
 import React from "react";
 import Quiz from "../pages/quiz";
 
-
 const exampleQuiz = {
     quizName : "Revolutions Quiz",
     quizDesc : "Test your knowledge of world revolutions.",
@@ -16,7 +15,30 @@ const exampleQuiz = {
         {question: "The Latin American state of Gran Colombia split apart into which countries shortly after winning independence?", answers: ["Colombia, Mexico, and Venezuela", "Colombia, Boliva, and Ecuador", "Colombia, Haiti, and Panama", "Colombia, Venezuela, and Ecuador"], correct: 3},
         {question: "Which other revolution occured during the French Revolution?", answers: ["Haitian", "Russian", "Italian", "American"], correct: 0},
         {question: "During the French revolution, which of the following people was guillotined last?", answers: ["Thomas Paine", "Marie Antoinette", "George Danton", "King Louis XVI"], correct: 2}
+    ],
+    scores : [
+        {name: "WER", score: 90},
+        {name:"NLR", score: 60}
     ]
 };
 
-export default exampleQuiz;
+const exampleQuiz2 = {
+    quizName : "Vampire Quiz",
+    quizDesc : "Find out the tricks of vampires... before they find you.",
+    questions : [
+        {question: "True or False? Bram Stoker's dracula had a cut chapter involving an earthquake Destroying Dracula's Castle.", answers: ["True", "False"], correct: 0},
+        {question: "The type of vampire known as the Penanggalan, which takes the form of a disembodied head, orgininates in the mythology of what country?.", answers: ["Albania", "Japan", "Indonesia", "Jordan"], correct: 2},
+        {question: "True or False? Werewolves and vampires being enemies is entirely a product of modern pop culture and does not have folkloric precedent.", answers: ["True", "False"], correct: 1},
+        {question: "In the novel Dracula, what substance is used to render Dracula's coffins useless to him?", answers: ["Eucharist wafers", "Holy water", "Garlic Bulbs", "English soil"], correct: 0},
+        {question: "True or False? The Austrian region of Styria has been associated with vampires long before the novel Carmilla was set there.", answers: ["True","False"], correct: 0},
+        {question: "Which animal can detect a vampire's lair in Balkans folklore?", answers: ["A pure-colored dog", "A one-eyed dog", "A pure-colored horse", "A one-eyed horse",], correct: 2},
+    ],
+    scores : [
+        {name: "Vlad", score: 30}
+    ]
+};
+
+const quizes = [exampleQuiz, exampleQuiz2];
+
+
+export default quizes;

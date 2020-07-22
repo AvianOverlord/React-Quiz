@@ -10,17 +10,12 @@ import QuizStart from './pages/quizStart';
 import ExampleQuiz from "./components/examplequiz";
 import QuizEnd from "./pages/quizEnd";
 import ScoreDisplay from "./pages/scoreDisplay";
+import Manager from "./components/manager";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/quizstart" render={(props) => (<QuizStart {...props} quiz={ExampleQuiz}/>)}/>
-        <Route exact path="/quiz" render={(props) => (<Quiz {...props} quiz={ExampleQuiz}/>)}/>
-        <Route exact path="/quizEnd" component={QuizEnd}/>
-        <Route exact path="/scores" render={(props) => (<ScoreDisplay {...props} scoreTable={ExampleScores} />)} />
-      </Router>
+      <Manager quizList = {ExampleQuiz}/>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Question from "../components/question";
 import Timer from "../components/timer";
+import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 
 class Quiz extends React.Component{
     constructor(props){
@@ -8,6 +9,7 @@ class Quiz extends React.Component{
         this.state = {index: 0, score: 0, timer: 200, currentQuestionText: "", currentAnswers: [], currentCorrect: ""};
         this.getAnswer = this.getAnswer.bind(this);
         this.decrementTimer = this.decrementTimer.bind(this);
+        this.setState = this.setState.bind(this);
     }
 
     componentDidMount()
@@ -17,62 +19,57 @@ class Quiz extends React.Component{
 
     setQuestion()
     {
-        this.setState({
-            ...this.state,
-            currentQuestionText: this.props.quiz.questions[this.state.index].question,
-            currentAnswers: this.props.quiz.questions[this.state.index].answers,
-            currentCorrect: this.props.quiz.questions[this.state.index].correct
-        })
+        if(this.state.index >= this.props.quiz.questions.length)
+        {
+            this.props.endQuiz(this.state.score);
+        }
+        else
+        {
+            this.setState({
+                ...this.state,
+                currentQuestionText: this.props.quiz.questions[this.state.index].question,
+                currentAnswers: this.props.quiz.questions[this.state.index].answers,
+                currentCorrect: this.props.quiz.questions[this.state.index].correct
+            })
+        }
     }
 
     getAnswer(correct)
     {
-        if(correct)
-        {
-            console.log("Correct answer given");
-            this.setState({
-                ...this.state,
-                index: this.state.index+1,
-                score: this.state.score+10
-            }, () => {
-                console.log(this.state.index);
-            });
-        }
-        else
-        {
-            console.log("Incorrect answer given");
-            this.setState({
-                ...this.state,
-                index: this.state.index+1,
-                timer: this.state.currentTimer-10
-            })
-        }
-        console.log("Current Index is" + this.index);
-
-        if(this.index >= this.props.quiz.questions.length)
-        {
-            this.props.endQuiz(this.score);
-        
-        }
-        else
-        {
-            this.setQuestion();
-        }
+        this.setState({...this.state,index: this.state.index+1}, ()=>{
+            console.log(this.state.index);
+            if(correct)
+            {   
+                this.setState({
+                    ...this.state,
+                    score: this.state.score+10
+                }, ()=> {
+                    this.setQuestion();
+                })
+            }
+            else
+            {
+                this.setState({
+                    ...this.state,
+                    timer: this.state.timer-10
+                }, ()=>{
+                    this.setQuestion();
+                })
+            }
+        })
     }
 
     decrementTimer()
     {
-        const currentTimer = this.timer;
-
         this.setState({
             ...this.state,
-            timer: currentTimer-1
-        })
-
-        if(this.timer <= 0)
-        {
-            this.props.endQuiz(this.score);
-        }
+            timer: this.state.timer-1
+        }, ()=> {
+            if(this.state.timer <= 0)
+            {
+                this.props.endQuiz(this.score);
+            }
+        });
     }
 
     render()
@@ -80,7 +77,7 @@ class Quiz extends React.Component{
         return(
             <div className="container quizScreen">
                 <div className="row">
-                    <p className="col-3">Score: <span className="scoreDisplay"></span></p>
+                    <p className="col-3">Score: {this.state.score}<span className="scoreDisplay"></span></p>
                     <Timer timerValue= {this.state.timer} decrementTimer= {this.decrementTimer}/>
                 </div>
                 <div>

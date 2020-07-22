@@ -1,10 +1,15 @@
 import React from "react";
 
 class Home extends React.Component{
-    handleClick(e) 
+    constructor(props)
+    {
+        super(props);
+    }
+
+    handleClick(value, e) 
     {    
         e.preventDefault();
-        alert('The quiz link was clicked.');
+        this.props.openQuiz(this.props.quizList[value]);
     }
 
     render ()
@@ -12,11 +17,10 @@ class Home extends React.Component{
         return(
             <header className="App-header">
                 <h1>William's Quiz Site</h1>
-                <ol> 
-                    <li><button onClick={this.handleClick}>Revolutions Quiz</button></li>
-                    <li><button>Vampire Quiz</button></li>
-                    <li><button>Civil War Quiz</button></li>
-                </ol>
+                {this.props.quizList.map((quiz, index) => 
+                                <button key={index} onClick={(e) => this.handleClick(index, e)} className="answer col-3 btn btn-light">{quiz.quizName}
+                                </button>
+                            )}
         </header>
         )
     }

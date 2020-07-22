@@ -9,7 +9,7 @@ class QuizStart extends React.Component{
 
     handleClick(e) {
         e.preventDefault();
-        alert("You clicked the start button.");
+        this.props.startQuiz();
     }
 
     componentDidMount(){
