@@ -2,6 +2,7 @@
   text-align: center;
   background-color: navy;
   color: white;
+  font-size: larger;
 }
 
 .App-logo {
@@ -42,6 +43,7 @@ body
 {
   background-color: navy;
   overflow: hidden;
+  font-size: large;
 }
 
 .navy

@@ -1,15 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
-//import 'bootstrap/dist/css/bootstrap.min.css';
-//import Button from "react-bootstrap/Button";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Home from "./pages/home";
-import Quiz from "./pages/quiz";
-import QuizStart from './pages/quizStart';
+
 import ExampleQuiz from "./components/examplequiz";
-import QuizEnd from "./pages/quizEnd";
-import ScoreDisplay from "./pages/scoreDisplay";
 import Manager from "./components/manager";
 
 function App() {

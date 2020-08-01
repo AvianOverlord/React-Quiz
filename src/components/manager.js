@@ -4,7 +4,7 @@ import QuizEnd from "../pages/quizEnd";
 import QuizStart from "../pages/quizStart";
 import Quiz from "../pages/quiz";
 import ScoreDisplay from "../pages/scoreDisplay";
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import Credits from "../pages/credits";
 
 
 class Manager extends React.Component{
@@ -17,6 +17,7 @@ class Manager extends React.Component{
         this.endQuiz = this.endQuiz.bind(this);
         this.displayScores = this.displayScores.bind(this);
         this.returnHome = this.returnHome.bind(this);
+        this.showCredits = this.showCredits.bind(this);
     }
 
     openQuiz(quiz)
@@ -65,6 +66,14 @@ class Manager extends React.Component{
         })
     }
 
+    showCredits()
+    {
+        this.setState({
+            ...this.state,
+            currentPage: "Credits"
+        })
+    }
+
     render()
     {
         return(
@@ -73,7 +82,8 @@ class Manager extends React.Component{
                 {this.state.currentPage === "Start" && <QuizStart quiz={this.state.currentQuiz} startQuiz={this.startQuiz}/>}
                 {this.state.currentPage === "Quiz" && <Quiz quiz={this.state.currentQuiz} endQuiz={this.endQuiz}/>}
                 {this.state.currentPage === "End" && <QuizEnd score={this.state.currentScore} displayScores={this.displayScores}/>}
-                {this.state.currentPage === "Score" && <ScoreDisplay quiz={this.state.currentQuiz} newName={this.state.currentName} newScore={this.state.currentScore} returnHome={this.returnHome}/>}
+                {this.state.currentPage === "Score" && <ScoreDisplay quiz={this.state.currentQuiz} newName={this.state.currentName} newScore={this.state.currentScore} returnHome={this.returnHome} showCredits={this.showCredits}/>}
+                {this.state.currentPage === "Credits" && <Credits returnHome={this.returnHome}/>}
             </div>
         );
     }

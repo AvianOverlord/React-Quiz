@@ -26,10 +26,17 @@ class ScoreDisplay extends React.Component
         })
     }
 
-    handleClick(e)
+    handleClick(showCredits, e)
     {
         e.preventDefault();
-        this.props.returnHome();
+        if(!showCredits)
+        {
+            this.props.returnHome();
+        }
+        else
+        {
+            this.props.showCredits();
+        }
     }
 
     render() {
@@ -41,7 +48,9 @@ class ScoreDisplay extends React.Component
                             <li key={index}>{scoreEntry.name}: {scoreEntry.score}</li>
                         )}
                 </ol>
-                <button onClick={this.handleClick} className="btn btn-danger">Return to main menu</button>
+                <button onClick={(e) => this.handleClick(false, e)} className="btn btn-danger">Return to main menu</button>
+                <br></br>
+                <button onClick={(e) => this.handleClick(true, e)} className="btn btn-danger">See credits</button>
             </div>
         );
     }
