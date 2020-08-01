@@ -36,10 +36,13 @@ class Quiz extends React.Component{
 
     getAnswer(correct)
     {
+        const audioS = document.getElementsByClassName("successSound")[0];
+        const audioF = document.getElementsByClassName("failureSound")[0];
         this.setState({...this.state,index: this.state.index+1}, ()=>{
             console.log(this.state.index);
             if(correct)
             {   
+                audioS.play();
                 this.setState({
                     ...this.state,
                     score: this.state.score+10
@@ -49,6 +52,7 @@ class Quiz extends React.Component{
             }
             else
             {
+                audioF.play();
                 this.setState({
                     ...this.state,
                     timer: this.state.timer-10
@@ -76,6 +80,12 @@ class Quiz extends React.Component{
     {
         return(
             <div className="container quizScreen">
+                <audio className="successSound">
+                    <source src="success_sound.wav"/>
+                </audio>
+                <audio className="failureSound">
+                    <source src="failure_sound.wav"></source>
+                </audio>
                 <div className="row">
                     <p className="col-3">Score: {this.state.score}<span className="scoreDisplay"></span></p>
                     <Timer timerValue= {this.state.timer} decrementTimer= {this.decrementTimer}/>
