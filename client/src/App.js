@@ -2,8 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import Axios from "axios";
 import ExampleQuiz from "./components/examplequiz";
 import Manager from "./components/manager";
 

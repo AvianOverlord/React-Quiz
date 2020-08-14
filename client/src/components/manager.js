@@ -8,6 +8,7 @@ import Credits from "../pages/credits";
 
 
 class Manager extends React.Component{
+
     constructor(props){
         super(props)
         this.state = {currentQuiz: {}, currentScore: "", currentPage: "Home", currentName: ""};
