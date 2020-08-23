@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 
 const db = require("./models");
+const seed = require("./data/examplequiz");
 
 const PORT = process.env.PORT || 5000;
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/test', {useNewUrlParser: true});
@@ -22,6 +23,20 @@ app.get('/', (req, res) => {
   
   }
   
+app.get("/api/quizlist", (req,res) => {
+  console.log("Recieved Request");
+  db.QuizData.find().then(data => {
+    console.log("Passed Data");
+    res.json(data);
+  }).catch(err => {
+    res.json(err);
+  });
+});
+
+
+db.QuizData.insertMany(seed).then(()=>{
+  console.log("Data inserted.");
+});
 
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);

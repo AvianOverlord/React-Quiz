@@ -1,6 +1,3 @@
-import React from "react";
-import Quiz from "../pages/quiz";
-
 const exampleQuiz = {
     quizName : "Revolutions Quiz",
     quizDesc : "Test your knowledge of world revolutions.",

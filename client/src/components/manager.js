@@ -6,12 +6,14 @@ import Quiz from "../pages/quiz";
 import ScoreDisplay from "../pages/scoreDisplay";
 import Credits from "../pages/credits";
 
+import QuizService from "../services/quizService";
+import { json } from "body-parser";
 
 class Manager extends React.Component{
 
     constructor(props){
         super(props)
-        this.state = {currentQuiz: {}, currentScore: "", currentPage: "Home", currentName: ""};
+        this.state = {quizList: [], currentQuiz: {}, currentScore: "", currentPage: "Home", currentName: ""};
         
         this.openQuiz = this.openQuiz.bind(this);
         this.startQuiz = this.startQuiz.bind(this);
@@ -19,6 +21,20 @@ class Manager extends React.Component{
         this.displayScores = this.displayScores.bind(this);
         this.returnHome = this.returnHome.bind(this);
         this.showCredits = this.showCredits.bind(this);
+        this.getQuizes();
+    }
+
+    getQuizes = async() =>
+    {
+        QuizService.getAll().then(quizes => {
+            //quizes = JSON.parse(quizes);
+            console.log("Data:" + quizes);
+            /*console.log("Quiz Query complete");
+            this.setState({
+                ...this.state,
+                quizList: quizes
+            })*/
+        });   
     }
 
     openQuiz(quiz)
@@ -79,7 +95,7 @@ class Manager extends React.Component{
     {
         return(
             <div className="manager">
-                {this.state.currentPage === "Home" && <Home quizList = {this.props.quizList} openQuiz= {this.openQuiz}/>}
+                {this.state.currentPage === "Home" && <Home quizList = {this.state.quizList} openQuiz= {this.openQuiz}/>}
                 {this.state.currentPage === "Start" && <QuizStart quiz={this.state.currentQuiz} startQuiz={this.startQuiz}/>}
                 {this.state.currentPage === "Quiz" && <Quiz quiz={this.state.currentQuiz} endQuiz={this.endQuiz}/>}
                 {this.state.currentPage === "End" && <QuizEnd score={this.state.currentScore} displayScores={this.displayScores}/>}
